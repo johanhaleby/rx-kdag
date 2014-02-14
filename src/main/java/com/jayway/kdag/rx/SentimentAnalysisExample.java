@@ -34,8 +34,4 @@ public class SentimentAnalysisExample {
     private static long analyze(List<String> match, String sentence) {
         return match.stream().filter(sentence::contains).count();
     }
-
-    private class Sentence {
-
-    }
 }
