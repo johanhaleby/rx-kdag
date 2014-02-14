@@ -10,7 +10,6 @@ import org.apache.http.impl.nio.client.HttpAsyncClients;
 import org.apache.http.nio.protocol.HttpAsyncRequestProducer;
 import rx.Observable;
 import rx.apache.http.ObservableHttp;
-import rx.util.functions.Action1;
 import rx.util.functions.Func1;
 import rx.util.functions.Func2;
 
@@ -19,9 +18,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
-import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
-import java.util.function.BinaryOperator;
 import java.util.stream.Collectors;
 
 import static com.jayway.restassured.path.xml.XmlPath.CompatibilityMode.HTML;
@@ -39,8 +36,6 @@ public class MovieExample {
     public static void main(String[] args) {
         final CloseableHttpAsyncClient httpClient = HttpAsyncClients.createDefault();
         httpClient.start();
-
-        Observable.from("1", "2");
 
         Observable<List<String>> filmCrave = ObservableHttp.createRequest(get(FILM_CRAVE_TOP_100_MOVIES_LIST), httpClient).toObservable().
                 flatMap(response -> response.getContent().map((Func1<byte[], String>) String::new)).
