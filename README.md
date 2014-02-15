@@ -46,7 +46,7 @@ The purpose here is to download the first 100 movie titles from the <a href="htt
 position on both lists. Print the movie name and the position of the movie to the console (or something fancier if time allows). You should use the
 <a href="https://github.com/Netflix/RxJava/tree/master/rxjava-contrib/rxjava-apache-http">RxJava HttpClient</a> extension when making requests to the website. You may
 parse the website in whatever way you find suitable (as long as it's downloaded using the RxJava HttpClient wrapper) but there are examples on how to parse to website
-using <a href="https://code.google.com/p/rest-assured/">RestAssured</<a>'s <a href="http://rest-assured.googlecode.com/svn/tags/2.3.0/apidocs/com/jayway/restassured/path/xml/XmlPath.html">XmlPath</a>
+using <a href="https://code.google.com/p/rest-assured/">RestAssured</a>'s <a href="http://rest-assured.googlecode.com/svn/tags/2.3.0/apidocs/com/jayway/restassured/path/xml/XmlPath.html">XmlPath</a>
 in the test `com.jayway.kdag.rx.MovieExampleTest`. To spice things up you should also periodically check the website for changes, you never know when a new film enters the top-list
 or if a position change :)
 
