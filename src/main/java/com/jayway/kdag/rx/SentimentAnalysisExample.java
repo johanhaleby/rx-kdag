@@ -37,12 +37,6 @@ public class SentimentAnalysisExample {
 
     }
 
-    private static List<String> shuffle(List<String> sentences) {
-        List<String> mutable = new ArrayList<>(sentences);
-        Collections.shuffle(mutable);
-        return Collections.unmodifiableList(mutable);
-    }
-
     private static long analyze(List<String> match, String sentence) {
         return match.stream().filter(sentence::contains).count();
     }
@@ -74,6 +68,12 @@ public class SentimentAnalysisExample {
                 }
             }
             return Subscriptions.empty();
+        }
+
+        private static List<String> shuffle(List<String> sentences) {
+            List<String> mutable = new ArrayList<>(sentences);
+            Collections.shuffle(mutable);
+            return Collections.unmodifiableList(mutable);
         }
     }
 }
