@@ -9,11 +9,11 @@ import java.awt.event.ActionEvent;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
 
-public class ButtonExample extends JFrame {
+public class ButtonCombinationExample extends JFrame {
 
     private static final String PASSWORD = "ABBABA";
 
-    public ButtonExample() {
+    public ButtonCombinationExample() {
         renderUI();
     }
 
@@ -58,7 +58,7 @@ public class ButtonExample extends JFrame {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            ButtonExample ex = new ButtonExample();
+            ButtonCombinationExample ex = new ButtonCombinationExample();
             ex.setVisible(true);
         });
     }
