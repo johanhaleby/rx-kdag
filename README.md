@@ -30,6 +30,8 @@ Print the result to the console (or something fancier if you like)! Start at `co
 2. Implement an Observable that shuffles and delays each sentence by a small amount of time for infinity.
 3. Create an Observable that takes live data from a Twitter stream (perhaps using <a href="http://twitter4j.org/">twitter4j</a> and performs sentiment analysis on each tweet. Note that this exercise may take some time so you may want to come back to it at the end if you have enough time.
 
+(Inspiration to this exercise came from <a href="http://www.jnthn.net/">Jonathan Worthington</a>)
+
 <h4>Button Combination</h4>
 Running the `com.jayway.kdag.rx.ButtonCombinationExample` will open up a simple Swing UI with two buttons (A & B) and two text areas. The purpose of this exercise is to
 is to use the <a href="https://github.com/Netflix/RxJava/tree/master/rxjava-contrib/rxjava-swing">RxJava Swing</a> extension to do the following:
