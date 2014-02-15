@@ -7,7 +7,7 @@ Prerequisites
 -------------
 If you want to run the program locally you need:
 
-1. Java 8 (Optional but recommended. If you want to use Java 7 then change compiler version in the pom.xml file).
+1. Java 8 (Optional but recommended. If you want to use Java 7 then change compiler version in the pom.xml file). Note that you can also use Groovy or Clojure if you prefer.
 2. Maven 3
 
 Exercises
