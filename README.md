@@ -33,8 +33,7 @@ Print the result to the console (or something fancier if you like)! Start at `co
 (Inspiration to this exercise came from <a href="http://www.jnthn.net/">Jonathan Worthington</a>)
 
 <h4>Button Combination</h4>
-Running the `com.jayway.kdag.rx.ButtonCombinationExample` will open up a simple Swing UI with two buttons (A & B) and two text areas. The purpose of this exercise is to
-is to use the <a href="https://github.com/Netflix/RxJava/tree/master/rxjava-contrib/rxjava-swing">RxJava Swing</a> extension to do the following:
+Running the `com.jayway.kdag.rx.ButtonCombinationExample` will open up a simple Swing UI with two buttons (A & B) and two text areas. The purpose of this exercise is to use the <a href="https://github.com/Netflix/RxJava/tree/master/rxjava-contrib/rxjava-swing">RxJava Swing</a> extension to do the following:
 
 1. React to button presses for the two buttons and print the button name on the text area in the south west corner for each button press.
 2. Find out if the user has pressed the password sequence of "ABBABA" and if so print "Password matched" in text area in the south east corner.
