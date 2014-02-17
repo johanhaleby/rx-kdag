@@ -26,7 +26,7 @@ or negative by checking if the sequence contains a given set of words. The rules
 
 Print the result to the console (or something fancier if you like)! Start at `com.jayway.kdag.rx.SentimentAnalysisExample` and implement the three sub-tasks:
 
-1. Convert the list of sentences loaded from `sentences.txt` into an Observable then solve the problem in FR style.
+1. Convert the list of sentences loaded from `sentences.txt` into an Observable then solve the problem in <a href="http://en.wikipedia.org/wiki/Functional_reactive_programming">FR</a> style.
 2. Implement an Observable that shuffles and delays each sentence by a small amount of time for infinity.
 3. Create an Observable that takes live data from a Twitter stream (perhaps using <a href="http://twitter4j.org/">twitter4j</a> and performs sentiment analysis on each tweet. Note that this exercise may take some time so you may want to come back to it at the end if you have enough time.
 
