@@ -35,8 +35,55 @@ public class MovieExample {
 
     public static void main(String[] args) {
         final CloseableHttpAsyncClient httpClient = HttpAsyncClients.createDefault();
+        httpClient.start();
 
-        // TODO Implement
+        Observable<List<String>> filmCrave = ObservableHttp.createRequest(get(FILM_CRAVE_TOP_100_MOVIES_LIST), httpClient).toObservable().
+                flatMap(response -> response.getContent().map((Func1<byte[], String>) String::new)).
+                takeWhile(line -> !StringUtils.endsWithIgnoreCase(line, "</html>")).
+                collect(new StringBuffer(), (stringBuffer, s) -> {
+                    stringBuffer.append(s);
+                }).
+                map(stringBuffer -> new XmlPath(HTML, stringBuffer.toString()).getList("**.findAll { it.a.@href.text().startsWith('movie') }", String.class)).
+                map(titlesWithYear -> titlesWithYear.stream().map((String titleWithYear) -> StringUtils.substringBeforeLast(titleWithYear, " ")).collect(Collectors.toList()));
+
+        Observable<List<String>> imdb = ObservableHttp.createRequest(get(IMDB_TOP_250_MOVIES_LIST), httpClient).toObservable().
+                flatMap(response -> response.getContent().map((Func1<byte[], String>) String::new)).
+                takeWhile(line -> !StringUtils.endsWithIgnoreCase(line, "</html>")).
+                collect(new StringBuffer(), (stringBuffer, s) -> {
+                    stringBuffer.append(s);
+                }).
+                map(stringBuffer -> new XmlPath(HTML, stringBuffer.toString()).
+                        getList("**.findAll { it.a.@href.text().startsWith('/title/')  }.a*.toString().findAll { !it.isEmpty() && it != 'X' }", String.class));
+
+        Observable.zip(filmCrave, imdb, new Func2<List<String>, List<String>, List<Pair<String, String>>>() {
+            @Override
+            public List<Pair<String, String>> call(List<String> filmCrave, List<String> imdb) {
+                Iterator<String> iterator = imdb.iterator();
+                return filmCrave.stream().reduce(new ArrayList<>(), (pairs, filmCraveMovie) -> {
+                    pairs.add(new ImmutablePair<>(filmCraveMovie, iterator.next()));
+                    return pairs;
+                }, (pairs1, pairs2) -> {
+                    pairs1.addAll(pairs2);
+                    return pairs1;
+                }
+                );
+            }
+        }).subscribe(pairs -> {
+            System.out.println(pairs);
+            try {
+                httpClient.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
+
+    }
+
+    static <T> T find(Collection<T> c1, Collection<T> c2, BiPredicate<T, T> pred) {
+        Iterator<T> it = c2.iterator();
+        return c1.stream().filter(x -> it.hasNext() && pred.test(x, it.next()))
+                .findFirst().orElse(null);
     }
 
     private static HttpAsyncRequestProducer get(String url) {

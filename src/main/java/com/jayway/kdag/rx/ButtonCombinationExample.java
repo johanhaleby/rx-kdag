@@ -39,7 +39,16 @@ public class ButtonCombinationExample extends JFrame {
         Observable<ActionEvent> buttonAObservable = SwingObservable.fromButtonAction(buttonA);
         Observable<ActionEvent> buttonBObservable = SwingObservable.fromButtonAction(buttonB);
 
-        // TODO Implement
+        Observable.merge(buttonAObservable, buttonBObservable).
+                doOnNext(actionEvent -> buttonClickTextArea.setText(buttonClickTextArea.getText() + actionEvent.getActionCommand())).
+                buffer(4, SECONDS, 6).
+                doOnNext(buttonSeq -> secretRevelationTextArea.setText("")).
+                map(actionEvents -> actionEvents.stream().map(ActionEvent::getActionCommand).reduce("", (a, b) -> a + b)).
+                doOnNext(buttonSequence -> System.out.println("Button sequence was " + buttonSequence)).
+                filter(buttonSequence -> buttonSequence.equals(PASSWORD)).
+                doOnNext(buttonSequence -> secretRevelationTextArea.setText("Password matched!")).
+                subscribe();
+
 
         setTitle("Enter secret combination");
         setSize(400, 300);
